@@ -51,7 +51,7 @@ def make_color_dict():
 # Set up a lookup table dict for RGB values
 led_color_dict = make_color_dict()
 
-monitorlist = ['Goblin', 'GoblinTransient']
+monitorlist = ['Network1', 'Network2']
 
 while True:
     current_nets = {}
