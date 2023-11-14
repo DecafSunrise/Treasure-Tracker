@@ -6,6 +6,8 @@ Getting Circuit Python on the Feather: https://learn.adafruit.com/adafruit-esp32
 NeoPixel docs: https://learn.adafruit.com/adafruit-esp32-s2-feather/neopixel-led
 Buzzer docs: https://learn.adafruit.com/using-piezo-buzzers-with-circuitpython-arduino/circuitpython
 Multitasking: https://learn.adafruit.com/multi-tasking-with-circuitpython/all-together-now
+
+I2C 1602 LCD drivers: https://github.com/dhalbert/CircuitPython_LCD
 """
 
 import board
@@ -16,6 +18,10 @@ import wifi
 
 import board
 import neopixel
+from lcd.lcd import LCD
+from lcd.i2c_pcf8574_interface import I2CPCF8574Interface
+lcd = LCD(I2CPCF8574Interface(board.I2C(), 0x27), num_rows=2, num_cols=16)
+lcd.print("Starting...")
 
 def print_network_stats(network):
     """Utility function to quickly print network stats"""
@@ -148,6 +154,8 @@ while True:
         pixel.fill((0, 0, 0))
         ## If you wanna get fancy you could make this a carriage return situation
         print(f"No network in range")
+        lcd.clear()
+        lcd.print("Scanning...")
         
     else:
         # Network in range, turn on LED
@@ -168,6 +176,8 @@ while True:
         ## If you wanna get fancy you could make this a carriage return situation
         print(f"Closest Network: {closest_net}")
         print(f"RSSI: {closest_net_rssi}")
+        lcd.clear()
+        lcd.print(f"Net: {closest_net}\nRSSI: {closest_net_rssi}")
     print("------\n")
     
     time.sleep(1)
