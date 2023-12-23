@@ -1,3 +1,11 @@
+"""
+Creating a "fox" for foxhunting.
+
+This code is for the M5StickC.
+
+Web IDE for flashing: https://flow.m5stack.com/
+"""
+
 from m5stack import *
 from m5ui import *
 from uiflow import *
